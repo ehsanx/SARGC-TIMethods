@@ -1,0 +1,25 @@
+---
+title: "A Practical Introduction to Propensity Score Analysis using R"
+author: "Ehsan Karim"
+date: "30/09/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Methods talk
+
+TI Methods Speaker Series in collaboration with the Student and Recent Graduate Committee (SARGC) of the Statistical Society of Canada.
+
+## About the topic
+
+Propensity score-based methods are widely used in analyzing observational datasets to reduce the impact of confounding due to observed covariates.  This Webinar will provide a basic overview of popular Propensity Score approaches, analysis steps explained in R, best practices, and reporting guidelines. The prerequisites are knowledge of multiple regression analysis, and working knowledge of R. Background in propensity score analysis or causal inference is not required.
+
+## Links
+
+- [Seminar series page](https://www.ti.ubc.ca/2020/08/06/sep-30-ti-methods-speaker-series-a-practical-introduction-to-propensity-score-analysis-using-r/)
+- [github page](https://ehsanx.github.io/SARGC-TIMethods/)
+- [github repo](https://github.com/ehsanx/SARGC-TIMethods)
+- [Author site](http://ehsank.com/)
