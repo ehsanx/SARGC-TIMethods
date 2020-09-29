@@ -20,6 +20,7 @@ Propensity score-based methods are widely used in analyzing observational datase
 
 ## Links
 
+- [Slide link](https://github.com/ehsanx/SARGC-TIMethods/raw/master/slidePS.pdf)
 - [TI Methods Speaker Series page](https://www.ti.ubc.ca/2020/08/06/sep-30-ti-methods-speaker-series-a-practical-introduction-to-propensity-score-analysis-using-r/)
 - [SARGC page](https://ssc.ca/en/students-and-recent-graduates-committee-0)
 - [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/)
