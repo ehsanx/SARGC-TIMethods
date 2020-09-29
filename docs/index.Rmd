@@ -14,18 +14,21 @@ require(DataExplorer)
 
 TI Methods Speaker Series in collaboration with the Student and Recent Graduate Committee (SARGC) of the Statistical Society of Canada.
 
+- [TI Methods Speaker Series page](https://www.ti.ubc.ca/2020/08/06/sep-30-ti-methods-speaker-series-a-practical-introduction-to-propensity-score-analysis-using-r/)
+- [SARGC page](https://ssc.ca/en/students-and-recent-graduates-committee-0)
+
 ## About the topic
 
 Propensity score-based methods are widely used in analyzing observational datasets to reduce the impact of confounding due to observed covariates.  This Webinar will provide a basic overview of popular Propensity Score approaches, analysis steps explained in R, best practices, and reporting guidelines. The prerequisites are knowledge of multiple regression analysis, and working knowledge of R. Background in propensity score analysis or causal inference is not required.
 
-## Links
+## Links for webinar materials
 
 - [Slide link](https://github.com/ehsanx/SARGC-TIMethods/raw/master/slidePS.pdf)
-- [TI Methods Speaker Series page](https://www.ti.ubc.ca/2020/08/06/sep-30-ti-methods-speaker-series-a-practical-introduction-to-propensity-score-analysis-using-r/)
-- [SARGC page](https://ssc.ca/en/students-and-recent-graduates-committee-0)
 - [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/)
 - [github repo for this methods talk](https://github.com/ehsanx/SARGC-TIMethods)
-  - Feel free to fork the repo or download specific files
+  - Due to file size, the HTML slide may not run properly from the web
+  - Feel free to fork the repo or download all/specific files
+  - The reproducible RMD file is included
 - [Presenter site](http://ehsank.com/)
 
 ## Software Requirements

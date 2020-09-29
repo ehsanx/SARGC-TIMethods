@@ -3,15 +3,15 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
-  beamer_presentation: 
-    keep_md: yes
-    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: espresso
     css: slides.css
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   slidy_presentation: 
     widescreen: yes
     smaller: yes
@@ -920,6 +920,58 @@ include_graphics("images/r7.png")
 include_graphics("images/r8.png") 
 
 include_graphics("images/r9.png") 
+```
+
+## [4] Discipline-specific PS Systematic Reviews 
+
+### Reporting Guideline
+
+- Be specific about population of interest
+  - ATT vs. ATE
+  - exclusion criteria
+- Be specific about exposure
+  - no multiple version of treatment
+  - no interference
+  - comparator
+- Report clearly about missing data
+  - how handled
+- Why PS matching (or other approach) was selected?  
+- Software
+
+## [4] Discipline-specific PS Systematic Reviews 
+
+### Reporting Guideline
+
+- How variables selected
+- Any important variables not measured
+  - proxy
+- Model selection
+  - interaction or polynomials
+  - logistic vs. machine learning
+- Overlap vs. balance
+  - numeric and visual
+
+
+```{r  out.width = "30%", cache=TRUE}
+include_graphics("images/books.png") 
+```
+
+## [4] Discipline-specific PS Systematic Reviews 
+
+### Reporting Guideline
+
+- Reduction % of the matched data
+- Residual imbalance
+  - refit PS model
+- Subgroup analysis
+  - Refit within each group for matching
+- Sensitivity analysis
+  - unmeasured confounder
+  - any positivity issue? 
+    - ad-hoc methods: truncation / trimming: bias-variance trade-off
+
+```{r  out.width = "50%", cache=TRUE}
+include_graphics("images/sub.png") 
 ```
 
 ## Further Reading
