@@ -8,6 +8,7 @@ output:
     smaller: yes
     keep_md: yes
     highlight: tango
+    css: slides.css
   beamer_presentation: 
     keep_md: yes
     highlight: tango
