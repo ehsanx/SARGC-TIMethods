@@ -1,0 +1,30 @@
+table.rmdtable td, table th {
+  font-size: 70%;
+  padding: 1em 0.5em;
+  line-height: 18px;
+}
+
+.table{
+  width:auto;
+  font-size: 12px;
+}
+
+.verysmall .table{
+  font-size: 8px;
+}
+
+.verylarge .table{
+  font-size: 16px;
+}
+
+#nextsteps {
+   color: blue;
+}
+
+.emphasized {
+   font-size: 1.2em;
+}
+
+.reveal section p {
+  color: blue;
+}

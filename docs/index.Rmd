@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+require(DataExplorer)
 ```
 
 ## Methods talk
@@ -24,3 +25,120 @@ Propensity score-based methods are widely used in analyzing observational datase
 - [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/)
 - [github repo for this methods talk](https://github.com/ehsanx/SARGC-TIMethods)
 - [Presenter site](http://ehsank.com/)
+
+## Software Requirements
+
+It is assumed that you have the following software packages installed. Webinar does not provide any installation support. Note that, working on software during the webinar is not mandatory. But if the participant like, they are welcome to browse through the webinar slides in their own laptop.
+
+- R from the following sources (installing either one is fine)
+  - [CRAN](https://cran.r-project.org/) or 
+  - [MRAN](https://mran.microsoft.com/open) 
+- IDE
+  - [RStudio desktop](https://www.rstudio.com/products/rstudio/download/) (installation necessary)
+  - Online accounts (no installation necessary, a supported browser is fine)
+    - Signup for an account on [rstudio.cloud](https://rstudio.cloud/)
+    -  Signup for an account on [Kaggle](https://www.kaggle.com/) (and choose R)
+
+# References
+
+- Austin, P. C. (2011). A tutorial and case study in propensity score analysis: an application to estimating the effect of in-hospital smoking cessation counseling on mortality. Multivariate behavioral research, 46(1), 119-151. [link](https://www.tandfonline.com/doi/pdf/10.1080/00273171.2011.540480)
+
+## Sample Data Source
+
+- [Research Article describing the data](https://jamanetwork.com/journals/jama/articlepdf/407990/jama_276_11_030.pdf): The effectiveness of Right Heart Catheterization (RHC) in the initial care of critically ill patients. [Openlink](https://www.researchgate.net/publication/236311165_The_Effectiveness_of_Right_Heart_Catheterization_in_the_Initial_Care_of_Critically_III_Patients) for the article.
+- [Details of the variables](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.html) about the training dataset:
+- Link to download the [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv).
+- Following are reproducible codes to prepare the analytic data used in the talk.
+
+```{r, eval = TRUE}
+rhc <- read.csv("http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv")
+# Change the Age variable into categories  below 50, [50,60), [60,70), [70,80), above 80
+rhc$age <- cut(rhc$age,breaks=c(-Inf, 50, 60, 70, 80, Inf),right=FALSE)
+# Re-order the levels of race to white, black and other
+rhc$race <- factor(rhc$race, levels=c("white","black","other"))
+# merging disease categories
+rhc$cat1 <- as.character(rhc$cat1)
+rhc$cat1[rhc$cat1 == "Lung Cancer"] <- "Other"
+rhc$cat1[rhc$cat1 == "COPD"] <- "Other"
+rhc$cat1[rhc$cat1 == "Coma"] <- "Other"
+rhc$cat1[rhc$cat1 == "Cirrhosis"] <- "Other"
+rhc$cat1[rhc$cat1 == "Colon Cancer"] <- "Other"
+rhc$cat1[rhc$cat1 == "MOSF w/Malignancy"] <- "MOSF"
+rhc$cat1[rhc$cat1 == "MOSF w/Sepsis"] <- "MOSF"
+rhc$cat1 <- as.factor(rhc$cat1)
+# Change the baseline for gender to Male
+rhc$sex <- as.factor(rhc$sex)
+rhc$sex <- relevel(rhc$sex, ref = "Male")
+# Regroup the levels for disease categories to "ARF","CHF","MOSF","Other".
+levels(rhc$ca) <- c("Metastatic","None","Localized (Yes)")
+# Rename the levels of "ca" (Cancer) to "Metastatic","None" and "Localized (Yes)" 
+rhc$ca <- factor(rhc$ca, levels=c("None","Localized (Yes)","Metastatic"))
+# re-order the levels to "None","Localized (Yes)" and "Metastatic"
+rhc$ca <- factor(rhc$ca, levels=c("None","Localized (Yes)","Metastatic"))
+# create a new variable called "numcom" to count number of comorbidities illness for each person  (12 categories)
+rhc$numcom <- rhc$cardiohx + rhc$chfhx + rhc$dementhx + rhc$psychhx + 
+  rhc$chrpulhx + rhc$renalhx + rhc$liverhx + rhc$gibledhx + rhc$malighx + 
+  rhc$immunhx + rhc$transhx +rhc$amihx
+rhc2 <- rhc[c("age","sex", "race","cat1", "ca", "dnr1", "aps1",
+              "surv2md1","numcom","adld3p","das2d3pc","temp1",
+              "hrt1","meanbp1","resp1","wblc1","pafi1","paco21",
+              "ph1","crea1","alb1","scoma1","swang1", "death")]
+names(rhc2) <- c("age","sex", "race","Disease.category", "Cancer", 
+                 "DNR.status", "APACHE.III.score", "Pr.2mo.survival",
+                 "No.of.comorbidity","ADLs.2wk.prior","DASI.2wk.prior",
+                 "Temperature","Heart.rate","Blood.pressure",
+                 "Respiratory.rate","WBC.count","PaO2.by.FIO2","PaCO2",
+                 "pH","Creatinine","Albumin","GComa.Score","RHC", "Death")
+dim(rhc2)
+rhc2$age <- factor(rhc2$age, levels = c("[-Inf,50)","[50,60)","[60,70)",
+                                        "[70,80)","[80, Inf)"), 
+                   ordered = TRUE)
+levels(rhc2$age)
+# Assess missing values
+require(DataExplorer)
+plot_missing(rhc2) 
+# simplifying
+rhc2$ADLs.2wk.prior <- NULL
+rhc2$Cancer <- NULL
+analytic.data0 <- rhc2 
+rm(rhc2)
+dim(analytic.data0)
+table(analytic.data0$RHC)
+table(analytic.data0$Death)
+# inducing some bias in a randomized study!!
+analytic.data0$ID <- 1:nrow(analytic.data0)
+# Younger age and no treated and did not survive
+id1 <- analytic.data0$ID[analytic.data0$RHC!="RHC" & analytic.data0$age =="[-Inf,50)" & analytic.data0$Death=="Yes"]
+# Female and not treated and did not survive
+id2 <- analytic.data0$ID[analytic.data0$RHC!="RHC" & analytic.data0$sex !="Male" & analytic.data0$Death=="Yes"]
+# Other race (other than white and black) and not treated and did not survive
+id3 <- analytic.data0$ID[analytic.data0$RHC!="RHC" & analytic.data0$race =="other" & analytic.data0$Death=="Yes"]
+# Abnormal heart rate and not treated and did not survive
+id4 <- analytic.data0$ID[analytic.data0$RHC!="RHC" & analytic.data0$Heart.rate < 70 & analytic.data0$Heart.rate > 110 & analytic.data0$Death=="Yes"]
+idx <- unique(c(id1,id2,id3,id4))
+length(idx)
+set.seed(123)
+# take a random sample of the above group
+exclude.id <- sample(idx, 
+                     size = round(length(idx)*3/4), 
+                     replace = FALSE)
+head(sort(exclude.id))
+# exclude the selected sample from the analytic data
+analytic.data <- analytic.data0[ !analytic.data0$ID %in% exclude.id, ]
+head(sort(analytic.data$ID))
+table(analytic.data$RHC)
+table(analytic.data$Death)
+dim(analytic.data)
+```
+
+```{r, echo=TRUE, eval = FALSE}
+# Saving the data for later use
+saveRDS(analytic.data, "/data/RHC.Rds")
+```
+
+```{r, echo=FALSE, results="hide", eval = TRUE}
+# Save data under folder "data"
+saveRDS(analytic.data, "C:/Users/wildscop/Documents/GitHub/SARGC-TIMethods/data/RHC.Rds")
+```
+
+

@@ -1,0 +1,26 @@
+/* Pretty print */
+  
+  /* line 600, ../scss/default.scss */
+  .prettyprint .com {
+    /* a comment */
+      color: blueviolet;
+    font-style: italic;
+  }
+
+/* line 604, ../scss/default.scss */
+  .prettyprint .lit {
+    /* a literal value */
+      color: black;
+  }
+
+/* line 609, ../scss/default.scss */
+  .prettyprint .pun,
+.prettyprint .opn,
+.prettyprint .clo {
+  color: red;
+}
+
+/* line 618, ../scss/default.scss */
+  .prettyprint .pln {
+    color: blue;
+  }
