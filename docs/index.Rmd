@@ -25,6 +25,7 @@ Propensity score-based methods are widely used in analyzing observational datase
 - [SARGC page](https://ssc.ca/en/students-and-recent-graduates-committee-0)
 - [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/)
 - [github repo for this methods talk](https://github.com/ehsanx/SARGC-TIMethods)
+  - Feel free to fork the repo or download specific files
 - [Presenter site](http://ehsank.com/)
 
 ## Software Requirements
@@ -51,9 +52,10 @@ It is assumed that you have the following software packages installed. Webinar d
 - Link to download the [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv).
 - Following are reproducible codes to prepare the analytic data used in the talk.
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 rhc <- read.csv("http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv")
 # Change the Age variable into categories  below 50, [50,60), [60,70), [70,80), above 80
+# categorizing a continuous variable is not recommended.
 rhc$age <- cut(rhc$age,breaks=c(-Inf, 50, 60, 70, 80, Inf),right=FALSE)
 # Re-order the levels of race to white, black and other
 rhc$race <- factor(rhc$race, levels=c("white","black","other"))
@@ -106,7 +108,7 @@ rm(rhc2)
 dim(analytic.data0)
 table(analytic.data0$RHC)
 table(analytic.data0$Death)
-# inducing some bias in a randomized study!!
+# inducing some bias in the study!!
 analytic.data0$ID <- 1:nrow(analytic.data0)
 # Younger age and no treated and did not survive
 id1 <- analytic.data0$ID[analytic.data0$RHC!="RHC" & analytic.data0$age =="[-Inf,50)" & analytic.data0$Death=="Yes"]
@@ -137,9 +139,11 @@ dim(analytic.data)
 saveRDS(analytic.data, "/data/RHC.Rds")
 ```
 
-```{r, echo=FALSE, results="hide", eval = TRUE}
+```{r, echo=FALSE, results="hide", eval = FALSE}
 # Save data under folder "data"
-saveRDS(analytic.data, "C:/Users/wildscop/Documents/GitHub/SARGC-TIMethods/data/RHC.Rds")
+saveRDS(analytic.data,
+        # change directory
+        "C:/Users/wildscop/Documents/GitHub/SARGC-TIMethods/data/RHC.Rds")
 ```
 
 

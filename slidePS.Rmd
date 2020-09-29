@@ -3,15 +3,22 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: espresso
     css: slides.css
-  slidy_presentation: default
-  beamer_presentation:
+  slidy_presentation: 
+    widescreen: yes
+    smaller: yes
+    keep_md: yes
     highlight: espresso
+    css: slides.css
+classoption: "aspectratio=169"    
 ---
 
 ```{r setup, include=FALSE}
@@ -47,10 +54,14 @@ require(cobalt)
 
 ## Outline
 
-1. Data and Regression
-2. Exact matching
-3. Propensity score matching (4 steps)
-4. Propensity score Reviews in different disease areas
+- [1] Data and Regression 
+  - (Diagnostics)
+- [2] Exact matching 
+  - (motivation)
+- [3] Propensity score matching 
+  - (4 steps)
+- [4] Propensity score Reviews in different disease areas 
+  - (brief)
 
 ## [1] Right Heart Catheterization (RHC) Dataset 
 
@@ -72,6 +83,21 @@ include_graphics("images/rhcvars.png")
 - Analysis strategy: matching RHC patients with non-RHC patients
 
 
+## [1] Right Heart Catheterization (RHC) Dataset 
+
+- `RHC` is helpful in guiding therapy decision
+  - Helps determine the pressures within the heart
+- Popularly beleived that `RHC` is benefitial
+- Conducting RCT is hard (ethical reasons)
+- Benefit of `RHC` was not shown earlier (1996)
+- SUPPORT data has 2 phases
+  - phase 1: prospective observational study
+  - phase 2: cluster RCT
+  - Data in this study is combined
+  
+```{r  out.width = "20%", cache=TRUE}
+include_graphics("images/RHC.png") 
+```
 
 ## [1] Load data
 
@@ -205,7 +231,7 @@ g2 %>% export_svg %>% charToRaw %>% rsvg %>% png::writePNG("images/dag1.png")
 knitr::include_graphics("images/dag1.png")
 ```
 
-Using a rather inappropriate data as the trial was randomized. But we have modified the analytic data to introduce some bias!!
+THis was not a completely randomized data; some observational data was combined.
 
 ## [1] Adjusted regression (v2)
 
@@ -727,35 +753,6 @@ include_graphics("images/citeaustin0.png")
 include_graphics("images/smdcut.png") 
 ```
 
-
-## [3] Propensity Score Matching
-
-### Step 3: Variance ratio
-
-- Variance ratios $\sim$ 1 means: 
- - equal variances in groups 
- - group balance
- - could vary from 1/2 to 2
- - other cut-points are suggested as well (0.8 to 1.2)
-
-```{r  out.width = "50%", fig.show = "hold", cache=TRUE}
-include_graphics("images/psbal.png")
-
-include_graphics("images/vr.png")
-```
-
-## [3] Propensity Score Matching
-
-### Step 3: Variance ratio
-
-```{r vr, cache=TRUE, echo = TRUE}
-require(cobalt)
-baltab.res <- bal.tab(x = match.obj, data = analytic.data, 
-                      treat = analytic.data$RHC, 
-                      disp.v.ratio = TRUE)
-baltab.res$Balance$V.Ratio.Adj
-```
-
 ## [3] Propensity Score Matching
 
 ### Step 3
@@ -790,6 +787,34 @@ Assessment of balance in the matched data
 ```{r ps11, cache=TRUE, echo = TRUE}
 smd.res <- ExtractSmd(tab1m)
 t(round(smd.res,2))
+```
+
+## [3] Propensity Score Matching
+
+### Step 3: Variance ratio
+
+- Variance ratios $\sim$ 1 means: 
+ - equal variances in groups 
+ - group balance
+ - could vary from 1/2 to 2
+ - other cut-points are suggested as well (0.8 to 1.2)
+
+```{r  out.width = "50%", fig.show = "hold", cache=TRUE}
+include_graphics("images/psbal.png")
+
+include_graphics("images/vr.png")
+```
+
+## [3] Propensity Score Matching
+
+### Step 3: Variance ratio
+
+```{r vr, cache=TRUE, echo = TRUE}
+require(cobalt)
+baltab.res <- bal.tab(x = match.obj, data = analytic.data, 
+                      treat = analytic.data$RHC, 
+                      disp.v.ratio = TRUE)
+baltab.res$Balance$V.Ratio.Adj
 ```
 
 ## [3] Propensity Score Matching
@@ -897,9 +922,7 @@ include_graphics("images/r8.png")
 include_graphics("images/r9.png") 
 ```
 
-## Reference
-
-For newbie:
+## Further Reading
 
 ```{r  out.width = "20%", cache=TRUE}
 include_graphics("images/book1.png") 
