@@ -7,8 +7,7 @@ output:
     widescreen: yes
     smaller: yes
     keep_md: yes
-    highlight: espresso
-    css: slides.css
+    highlight: tango
   beamer_presentation: 
     keep_md: yes
     highlight: tango
@@ -16,7 +15,7 @@ output:
     widescreen: yes
     smaller: yes
     keep_md: yes
-    highlight: espresso
+    highlight: tango
     css: slides.css
 classoption: "aspectratio=169"    
 ---

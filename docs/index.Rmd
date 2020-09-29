@@ -23,8 +23,8 @@ Propensity score-based methods are widely used in analyzing observational datase
 
 ## Links for webinar materials
 
-- [Slide link](https://github.com/ehsanx/SARGC-TIMethods/raw/master/slidePS.pdf)
-- [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/)
+- [Slide link](https://github.com/ehsanx/SARGC-TIMethods/raw/master/slidePS.pdf) [PDF]
+- [github page for this methods talk](https://ehsanx.github.io/SARGC-TIMethods/) [This page!]
 - [github repo for this methods talk](https://github.com/ehsanx/SARGC-TIMethods)
   - Due to file size, the HTML slide may not run properly from the web
   - Feel free to fork the repo or download all/specific files
