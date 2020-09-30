@@ -297,15 +297,15 @@ baselinevars <- c("age","sex", "race","Disease.category",
                   "Respiratory.rate", "WBC.count",
                   "PaO2.by.FIO2","PaCO2","pH",
                   "Creatinine","Albumin","GComa.Score")
-out.formula <- as.formula(paste("I(Death=='Yes')", "~", 
+out.formula <- as.formula(paste("I(Death=='Yes')", "~ RHC +", 
                                paste(baselinevars, 
                                      collapse = "+")))
 out.formula
 ```
 
 ```
-## I(Death == "Yes") ~ age + sex + race + Disease.category + DNR.status + 
-##     APACHE.III.score + Pr.2mo.survival + No.of.comorbidity + 
+## I(Death == "Yes") ~ RHC + age + sex + race + Disease.category + 
+##     DNR.status + APACHE.III.score + Pr.2mo.survival + No.of.comorbidity + 
 ##     DASI.2wk.prior + Temperature + Heart.rate + Blood.pressure + 
 ##     Respiratory.rate + WBC.count + PaO2.by.FIO2 + PaCO2 + pH + 
 ##     Creatinine + Albumin + GComa.Score
@@ -322,37 +322,39 @@ publish(fit2)
 
 ```
 ##           Variable     Units OddsRatio       CI.95     p-value 
+##                RHC    No RHC       Ref                         
+##                          RHC      2.55 [2.18;2.97]     < 1e-04 
 ##                age [-Inf,50)       Ref                         
-##                      [50,60)      1.54 [1.27;1.87]     < 1e-04 
-##                      [60,70)      0.73 [0.62;0.87]   0.0002517 
-##                      [70,80)      1.13 [0.97;1.32]   0.1142952 
-##                    [80, Inf)      1.12 [0.97;1.29]   0.1117607 
+##                      [50,60)      1.70 [1.39;2.07]     < 1e-04 
+##                      [60,70)      0.77 [0.65;0.91]   0.0019296 
+##                      [70,80)      1.18 [1.01;1.38]   0.0396871 
+##                    [80, Inf)      1.13 [0.98;1.30]   0.0957860 
 ##                sex      Male       Ref                         
-##                       Female      0.48 [0.42;0.55]     < 1e-04 
+##                       Female      0.43 [0.38;0.50]     < 1e-04 
 ##               race     white       Ref                         
-##                        black      1.12 [0.93;1.36]   0.2314302 
-##                        other      1.00 [0.74;1.35]   0.9881736 
+##                        black      1.14 [0.94;1.38]   0.1917093 
+##                        other      0.91 [0.67;1.24]   0.5634739 
 ##   Disease.category       ARF       Ref                         
-##                          CHF      1.64 [1.24;2.16]   0.0004557 
-##                         MOSF      1.06 [0.89;1.26]   0.4986705 
-##                        Other      1.14 [0.93;1.41]   0.2070459 
+##                          CHF      1.30 [0.98;1.73]   0.0702401 
+##                         MOSF      0.94 [0.79;1.12]   0.4786581 
+##                        Other      1.29 [1.04;1.59]   0.0196439 
 ##         DNR.status        No       Ref                         
-##                          Yes      2.20 [1.67;2.89]     < 1e-04 
-##   APACHE.III.score                1.01 [1.00;1.01]   0.0115427 
+##                          Yes      2.44 [1.85;3.22]     < 1e-04 
+##   APACHE.III.score                1.01 [1.00;1.01]   0.0903495 
 ##    Pr.2mo.survival                0.01 [0.01;0.02]     < 1e-04 
-##  No.of.comorbidity                1.20 [1.13;1.29]     < 1e-04 
-##     DASI.2wk.prior                0.96 [0.94;0.97]     < 1e-04 
-##        Temperature                0.94 [0.90;0.98]   0.0038857 
-##         Heart.rate                1.00 [1.00;1.00]   0.0191355 
-##     Blood.pressure                1.00 [1.00;1.00]   0.5000114 
-##   Respiratory.rate                1.00 [0.99;1.00]   0.7569105 
-##          WBC.count                1.01 [1.00;1.01]   0.0360557 
-##       PaO2.by.FIO2                1.00 [1.00;1.00]   0.2173154 
-##              PaCO2                0.99 [0.99;1.00]   0.0902647 
-##                 pH                0.88 [0.39;1.94]   0.7433254 
-##         Creatinine                1.03 [1.00;1.07]   0.0874115 
-##            Albumin                0.98 [0.90;1.07]   0.6650240 
-##        GComa.Score                1.00 [0.99;1.00]   0.0260942
+##  No.of.comorbidity                1.22 [1.14;1.30]     < 1e-04 
+##     DASI.2wk.prior                0.95 [0.94;0.97]     < 1e-04 
+##        Temperature                0.94 [0.90;0.99]   0.0095914 
+##         Heart.rate                1.00 [1.00;1.00]   0.0975692 
+##     Blood.pressure                1.00 [1.00;1.00]   0.5146500 
+##   Respiratory.rate                1.00 [1.00;1.01]   0.1459102 
+##          WBC.count                1.01 [1.00;1.01]   0.0259773 
+##       PaO2.by.FIO2                1.00 [1.00;1.00]   0.0003039 
+##              PaCO2                1.00 [0.99;1.00]   0.5339307 
+##                 pH                1.03 [0.46;2.33]   0.9407749 
+##         Creatinine                1.03 [0.99;1.07]   0.1781145 
+##            Albumin                1.00 [0.92;1.10]   0.9337588 
+##        GComa.Score                1.00 [0.99;1.00]   0.0441504
 ```
 ## [1] Adjusted regression (v2)
 
@@ -447,15 +449,22 @@ require(MatchIt)
 m.out = matchit (RHC=="RHC" ~ sex + race,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = RHC == "RHC" ~ sex + race, data = analytic.data, 
+##     method = "exact")
+## 
+## Exact Subclasses: 6
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched      2583    2184
 ## Unmatched       0       0
-## Discarded       0       0
 ```
 
 ## [2] Exact Matching: 3 variables
@@ -501,15 +510,22 @@ table(analytic.data$RHC,var.comb=="otherFemale[80, Inf)")
 m.out = matchit (RHC=="RHC" ~ age + sex + race,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = RHC == "RHC" ~ age + sex + race, data = analytic.data, 
+##     method = "exact")
+## 
+## Exact Subclasses: 29
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched      2581    2184
-## Unmatched       0       0
-## Discarded       0       0
+## Unmatched       2       0
 ```
 
 ## [2] Exact Matching: 3 variables
@@ -553,15 +569,22 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Disease.category + DNR.status,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = RHC == "RHC" ~ age + sex + race + Disease.category + 
+##     DNR.status, data = analytic.data, method = "exact")
+## 
+## Exact Subclasses: 137
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched      2524    2150
-## Unmatched       0       0
-## Discarded       0       0
+## Unmatched      59      34
 ```
 
 ## [2] Exact Matching: many categorical variables
@@ -597,15 +620,22 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Heart.rate, # continuous
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = RHC == "RHC" ~ age + sex + race + Disease.category + 
+##     DNR.status + Heart.rate, data = analytic.data, method = "exact")
+## 
+## Exact Subclasses: 504
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched       929     947
-## Unmatched       0       0
-## Discarded       0       0
+## Unmatched    1654    1237
 ```
 
 ## [2] Exact Matching: including more continuous variables
@@ -618,15 +648,23 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Temperature, 
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = RHC == "RHC" ~ age + sex + race + Disease.category + 
+##     DNR.status + Heart.rate + Blood.pressure + Temperature, data = analytic.data, 
+##     method = "exact")
+## 
+## Exact Subclasses: 3
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched         3       3
-## Unmatched       0       0
-## Discarded       0       0
+## Unmatched    2580    2181
 ```
 
 ## [2] Exact Matching: including more continuous variables
@@ -975,10 +1013,17 @@ summary(match.obj$distance)
 
 
 ```r
-match.obj$nn
+match.obj
 ```
 
 ```
+## 
+## Call: 
+## matchit(formula = ps.formula, data = analytic.data, method = "nearest", 
+##     distance = analytic.data$PS, replace = FALSE, caliper = 0.1 * 
+##         sd(logitPS), ratio = 1)
+## 
+## Sample sizes:
 ##           Control Treated
 ## All          2583    2184
 ## Matched      1519    1519
@@ -1367,8 +1412,8 @@ out.formula
 ```
 
 ```
-## I(Death == "Yes") ~ age + sex + race + Disease.category + DNR.status + 
-##     APACHE.III.score + Pr.2mo.survival + No.of.comorbidity + 
+## I(Death == "Yes") ~ RHC + age + sex + race + Disease.category + 
+##     DNR.status + APACHE.III.score + Pr.2mo.survival + No.of.comorbidity + 
 ##     DASI.2wk.prior + Temperature + Heart.rate + Blood.pressure + 
 ##     Respiratory.rate + WBC.count + PaO2.by.FIO2 + PaCO2 + pH + 
 ##     Creatinine + Albumin + GComa.Score
@@ -1381,38 +1426,40 @@ publish(fit3b)
 ```
 
 ```
-##           Variable     Units OddsRatio       CI.95     p-value 
-##                age [-Inf,50)       Ref                         
-##                      [50,60)      1.62 [1.26;2.09]   0.0001639 
-##                      [60,70)      0.76 [0.61;0.94]   0.0131863 
-##                      [70,80)      1.14 [0.94;1.38]   0.1935493 
-##                    [80, Inf)      1.26 [1.06;1.51]   0.0084480 
-##                sex      Male       Ref                         
-##                       Female      0.45 [0.38;0.54]     < 1e-04 
-##               race     white       Ref                         
-##                        black      1.13 [0.89;1.44]   0.3224165 
-##                        other      0.87 [0.59;1.28]   0.4779060 
-##   Disease.category       ARF       Ref                         
-##                          CHF      1.47 [1.05;2.06]   0.0251017 
-##                         MOSF      1.02 [0.83;1.26]   0.8354884 
-##                        Other      1.28 [0.94;1.73]   0.1134749 
-##         DNR.status        No       Ref                         
-##                          Yes      2.51 [1.69;3.75]     < 1e-04 
-##   APACHE.III.score                1.00 [1.00;1.01]   0.2170832 
-##    Pr.2mo.survival                0.01 [0.00;0.01]     < 1e-04 
-##  No.of.comorbidity                1.18 [1.09;1.28]     < 1e-04 
-##     DASI.2wk.prior                0.95 [0.94;0.97]     < 1e-04 
-##        Temperature                0.95 [0.90;1.00]   0.0594218 
-##         Heart.rate                1.00 [1.00;1.00]   0.0802537 
-##     Blood.pressure                1.00 [1.00;1.00]   0.3146312 
-##   Respiratory.rate                1.00 [1.00;1.01]   0.3492897 
-##          WBC.count                1.00 [0.99;1.01]   0.5707415 
-##       PaO2.by.FIO2                1.00 [1.00;1.00]   0.0128897 
-##              PaCO2                1.00 [0.99;1.01]   0.8801280 
-##                 pH                0.92 [0.33;2.54]   0.8731477 
-##         Creatinine                1.03 [0.98;1.08]   0.1897378 
-##            Albumin                1.01 [0.91;1.13]   0.8175665 
-##        GComa.Score                1.00 [0.99;1.00]   0.0123163
+##           Variable     Units OddsRatio       CI.95    p-value 
+##                RHC    No RHC       Ref                        
+##                          RHC      2.55 [2.14;3.03]    < 1e-04 
+##                age [-Inf,50)       Ref                        
+##                      [50,60)      1.72 [1.33;2.23]    < 1e-04 
+##                      [60,70)      0.76 [0.61;0.95]   0.015909 
+##                      [70,80)      1.12 [0.92;1.37]   0.263369 
+##                    [80, Inf)      1.27 [1.06;1.52]   0.008216 
+##                sex      Male       Ref                        
+##                       Female      0.43 [0.36;0.52]    < 1e-04 
+##               race     white       Ref                        
+##                        black      1.14 [0.89;1.46]   0.310211 
+##                        other      0.86 [0.57;1.29]   0.460330 
+##   Disease.category       ARF       Ref                        
+##                          CHF      1.49 [1.05;2.10]   0.025167 
+##                         MOSF      1.00 [0.81;1.24]   0.981457 
+##                        Other      1.34 [0.98;1.82]   0.068593 
+##         DNR.status        No       Ref                        
+##                          Yes      2.60 [1.73;3.90]    < 1e-04 
+##   APACHE.III.score                1.00 [1.00;1.01]   0.297336 
+##    Pr.2mo.survival                0.01 [0.00;0.01]    < 1e-04 
+##  No.of.comorbidity                1.19 [1.10;1.30]    < 1e-04 
+##     DASI.2wk.prior                0.95 [0.93;0.96]    < 1e-04 
+##        Temperature                0.95 [0.90;1.01]   0.081292 
+##         Heart.rate                1.00 [1.00;1.00]   0.089442 
+##     Blood.pressure                1.00 [1.00;1.00]   0.207696 
+##   Respiratory.rate                1.00 [1.00;1.01]   0.175634 
+##          WBC.count                1.00 [1.00;1.01]   0.417667 
+##       PaO2.by.FIO2                1.00 [1.00;1.00]   0.005573 
+##              PaCO2                1.00 [0.99;1.01]   0.907590 
+##                 pH                0.86 [0.30;2.43]   0.770447 
+##         Creatinine                1.03 [0.99;1.08]   0.155861 
+##            Albumin                1.02 [0.91;1.15]   0.699519 
+##        GComa.Score                1.00 [0.99;1.00]   0.013497
 ```
 
 

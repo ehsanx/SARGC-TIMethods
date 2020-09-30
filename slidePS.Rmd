@@ -274,7 +274,7 @@ baselinevars <- c("age","sex", "race","Disease.category",
                   "Respiratory.rate", "WBC.count",
                   "PaO2.by.FIO2","PaCO2","pH",
                   "Creatinine","Albumin","GComa.Score")
-out.formula <- as.formula(paste("I(Death=='Yes')", "~", 
+out.formula <- as.formula(paste("I(Death=='Yes')", "~ RHC +", 
                                paste(baselinevars, 
                                      collapse = "+")))
 out.formula
@@ -343,7 +343,7 @@ require(MatchIt)
 m.out = matchit (RHC=="RHC" ~ sex + race,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ## [2] Exact Matching: 3 variables
@@ -363,7 +363,7 @@ table(analytic.data$RHC,var.comb=="otherFemale[80, Inf)")
 m.out = matchit (RHC=="RHC" ~ age + sex + race,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ## [2] Exact Matching: 3 variables
@@ -385,7 +385,7 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Disease.category + DNR.status,
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ## [2] Exact Matching: many categorical variables
@@ -406,7 +406,7 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Heart.rate, # continuous
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ## [2] Exact Matching: including more continuous variables
@@ -418,7 +418,7 @@ m.out = matchit (RHC=="RHC" ~ age + sex + race +
                    Temperature, 
                  data = analytic.data, 
                  method = "exact") 
-m.out$nn
+m.out
 ```
 
 ## [2] Exact Matching: including more continuous variables
@@ -664,7 +664,7 @@ summary(match.obj$distance)
 ### Step 2
 
 ```{r ps7b, cache=TRUE, echo = TRUE}
-match.obj$nn
+match.obj
 ```
 
 ## [3] Propensity Score Matching
