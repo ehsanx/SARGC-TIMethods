@@ -3,15 +3,15 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: tango
     css: slides.css
-  beamer_presentation: 
-    keep_md: yes
-    highlight: tango
   slidy_presentation: 
     widescreen: yes
     smaller: yes
@@ -260,7 +260,7 @@ g2 %>% export_svg %>% charToRaw %>% rsvg %>% png::writePNG("images/dag1.png")
 knitr::include_graphics("images/dag1.png")
 ```
 
-THis was not a completely randomized data; some observational data was combined.
+This was not a completely randomized data; some observational data was combined.
 
 ## [1] Adjusted regression (v2)
 
@@ -512,7 +512,7 @@ include_graphics("images/citeaustin.png")
 - Stage 1: exposure modelling: $PS = Prob(A=1|L)$
 - Stage 2: Match by $PS$
 - Stage 2: Assess balance and overlap ($PS$ and $L$)
-- phase 4: outcome modelling: $Prob(Y=1|A=1)$
+- Stage 4: outcome modelling: $Prob(Y=1|A=1)$
 
 
 ## [3] Propensity Score Matching

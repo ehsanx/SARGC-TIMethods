@@ -3,15 +3,15 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: tango
     css: slides.css
-  beamer_presentation: 
-    keep_md: yes
-    highlight: tango
   slidy_presentation: 
     widescreen: yes
     smaller: yes
@@ -77,7 +77,8 @@ classoption: "aspectratio=169"
 
 The [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.html) that we will use today is from Connors et al. (1996).
 
-<img src="images/citeRHC.png" width="40%" /><img src="images/rhcvars.png" width="40%" />
+
+\includegraphics[width=0.4\linewidth]{images/citeRHC} \includegraphics[width=0.4\linewidth]{images/rhcvars} 
 
 ### Notations
 
@@ -102,7 +103,8 @@ The [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.html) 
   - phase 2: cluster RCT
   - Data in this study is combined
   
-<img src="images/RHC.png" width="20%" />
+
+\includegraphics[width=0.2\linewidth]{images/RHC} 
 
 ## [1] Load data
 
@@ -277,9 +279,10 @@ Conditional exchangeability; only works if $L$ is measured
 
 
 
-<img src="images/dag1.png" width="50%" />
 
-THis was not a completely randomized data; some observational data was combined.
+\includegraphics[width=0.5\linewidth]{images/dag1} 
+
+This was not a completely randomized data; some observational data was combined.
 
 ## [1] Adjusted regression (v2)
 
@@ -358,7 +361,8 @@ publish(fit2)
 plot(fit2, which =1)
 ```
 
-<img src="slidePS_files/figure-html/reg3bc1-1.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{slidePS_files/figure-beamer/reg3bc1-1} 
 
 - curvilinear trends?
   - logistic regression IS curvilinear by nature
@@ -370,7 +374,8 @@ plot(fit2, which =1)
 plot(fit2, which =3)
 ```
 
-<img src="slidePS_files/figure-html/reg3bc3-1.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{slidePS_files/figure-beamer/reg3bc3-1} 
 
 - red line is approximately horizontal?
 - points have approximately equal spread around the red line? 
@@ -383,7 +388,8 @@ plot(fit2, which =3)
 plot(fit2, which =4)
 ```
 
-<img src="slidePS_files/figure-html/reg3bc3jr-1.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{slidePS_files/figure-beamer/reg3bc3jr-1} 
 
 -  Cook's D estimates the influence of data points
 
@@ -681,7 +687,8 @@ baselinevars
 
 ## [3] Propensity Score 
 
-<img src="images/citePS.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citePS} 
 
 ### Theoretical result
 
@@ -706,7 +713,8 @@ baselinevars
 
 ## [3] Propensity Score 
 
-<img src="images/psvar.png" width="50%" /><img src="images/psdesign.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/psvar} \includegraphics[width=0.5\linewidth]{images/psdesign} 
 
 - Observed covariates are used to fix design
 - Which covariates should be selected:
@@ -731,26 +739,30 @@ Many ways to use propensity scores (PS) in the analysis
 
 ## [3] Propensity Score Matching
 
-<img src="images/citeaustin.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citeaustin} 
 
 ### Propensity score matching has 4 steps
 
 - Stage 1: exposure modelling: $PS = Prob(A=1|L)$
 - Stage 2: Match by $PS$
 - Stage 2: Assess balance and overlap ($PS$ and $L$)
-- phase 4: outcome modelling: $Prob(Y=1|A=1)$
+- Stage 4: outcome modelling: $Prob(Y=1|A=1)$
 
 
 ## [3] Propensity Score Matching
 
-<img src="images/citeaustin0.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citeaustin0} 
 
 - Assessment of Balance in the whole data 
   - balance = similarity of the covariate distributions
   - $d$ or $SMD > 0.1$ can be considered as imbalance
 
-<img src="images/d1.png" width="20%" />
-<img src="images/d2.png" width="40%" />
+
+\includegraphics[width=0.2\linewidth]{images/d1} 
+
+\includegraphics[width=0.4\linewidth]{images/d2} 
 
 
 ```r
@@ -857,7 +869,8 @@ analytic.data$PS <- predict(PS.fit,
 - Prediction of $A$ is just a means to that end (as true PS is unknown).
 - May attract variables highly associated with $A$
 
-<img src="images/citesuper0.png" width="50%" /><img src="images/citesuper.png" width="50%" /><img src="images/psalt.png" width="50%" /><img src="images/psml.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citesuper0} \includegraphics[width=0.5\linewidth]{images/citesuper} \includegraphics[width=0.5\linewidth]{images/psalt} \includegraphics[width=0.5\linewidth]{images/psml} 
 
 ## [3] Propensity score Matching
 
@@ -914,7 +927,8 @@ logitPS <-  -log(1/analytic.data$PS - 1)
 ```r
 # choosing too strict PS has unintended consequences 
 ```
-<img src="images/citecapiler.png" width="50%" /><img src="images/pscal.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citecapiler} \includegraphics[width=0.5\linewidth]{images/pscal} 
 
 
 ## [3] Propensity Score Matching
@@ -928,7 +942,8 @@ Match using estimates propensity scores
 - with caliper = .1*SD of logit of propensity score
 - with 1:1 ratio (pair-matching)
 
-<img src="images/nn.png" width="30%" />
+
+\includegraphics[width=0.3\linewidth]{images/nn} 
 
 ## [3] Propensity Score Matching
 
@@ -1090,7 +1105,8 @@ stripchart(PS ~ RHC=='RHC', vertical = TRUE,
            add = TRUE, pch = 20, col = 'blue')
 ```
 
-<img src="slidePS_files/figure-html/ps3-1.png" width="30%" />
+
+\includegraphics[width=0.3\linewidth]{slidePS_files/figure-beamer/ps3-1} 
 
 ## [3] Propensity Score Matching
 
@@ -1103,7 +1119,8 @@ Vizualization
 plot(match.obj, type = "jitter")
 ```
 
-<img src="slidePS_files/figure-html/ps8-1.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{slidePS_files/figure-beamer/ps8-1} 
 
 ```
 ## [1] "To identify the units, use first mouse button; to stop, use second."
@@ -1125,7 +1142,8 @@ Vizualization for assessing overlap issues
 plot(match.obj, type = "hist")
 ```
 
-<img src="slidePS_files/figure-html/ps9-1.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{slidePS_files/figure-beamer/ps9-1} 
 
 ## [3] Propensity Score Matching
 
@@ -1147,7 +1165,8 @@ Compare the similarity of baseline characteristics between treated and untreated
 - In this case, we will compare SMD < 0.1 or not. 
 - In some literature, other generous values (0.25) are proposed.
 
-<img src="images/citeaustin0.png" width="50%" /><img src="images/smdcut.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citeaustin0} \includegraphics[width=0.5\linewidth]{images/smdcut} 
 
 ## [3] Propensity Score Matching
 
@@ -1205,7 +1224,8 @@ Possible to get p-values to check balance: but strongly discouraged
 
 - P-value based balance assessment can be influenced by sample size
 
-<img src="images/citeaustin.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/citeaustin} 
 
 
 ```r
@@ -1283,7 +1303,8 @@ t(round(smd.res,2))
  - could vary from 1/2 to 2
  - other cut-points are suggested as well (0.8 to 1.2)
 
-<img src="images/psbal.png" width="50%" /><img src="images/vr.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/psbal} \includegraphics[width=0.5\linewidth]{images/vr} 
 
 ## [3] Propensity Score Matching
 
@@ -1408,7 +1429,8 @@ The above analysis do not take matched pair into consideration while regressing.
 - Bootstrap for matched pairfor WOR
   - may not be appropriate for WR
 
-<img src="images/boot.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/boot} 
 
 ## [3] Propensity Score Matching
 
@@ -1450,7 +1472,8 @@ Outdated package
   - Critical care / anesthesiology / Sepsis / Psychology
   - Cancer / Multiple sclerosis 
 - Not meta-analysis; but reviews of usage of PS methods in different disciplines
-<img src="images/r1.png" width="30%" /><img src="images/r2.png" width="30%" /><img src="images/r3.png" width="30%" /><img src="images/r4.png" width="30%" /><img src="images/r5.png" width="30%" /><img src="images/r6.png" width="30%" /><img src="images/r7.png" width="30%" /><img src="images/r8.png" width="30%" /><img src="images/r9.png" width="30%" />
+
+\includegraphics[width=0.3\linewidth]{images/r1} \includegraphics[width=0.3\linewidth]{images/r2} \includegraphics[width=0.3\linewidth]{images/r3} \includegraphics[width=0.3\linewidth]{images/r4} \includegraphics[width=0.3\linewidth]{images/r5} \includegraphics[width=0.3\linewidth]{images/r6} \includegraphics[width=0.3\linewidth]{images/r7} \includegraphics[width=0.3\linewidth]{images/r8} \includegraphics[width=0.3\linewidth]{images/r9} 
 
 ## [4] Discipline-specific PS Systematic Reviews 
 
@@ -1482,7 +1505,8 @@ Outdated package
   - numeric and visual
 
 
-<img src="images/books.png" width="30%" />
+
+\includegraphics[width=0.3\linewidth]{images/books} 
 
 ## [4] Discipline-specific PS Systematic Reviews 
 
@@ -1498,12 +1522,15 @@ Outdated package
   - any positivity issue? Deleting extremes has consequences!
     - ad-hoc methods: truncation / trimming: bias-variance trade-off
 
-<img src="images/sub.png" width="50%" /><img src="images/hdps.png" width="50%" />
+
+\includegraphics[width=0.5\linewidth]{images/sub} \includegraphics[width=0.5\linewidth]{images/hdps} 
 
 ## Further Reading
 
-<img src="images/book1.png" width="20%" />
-<img src="images/book.png" width="50%" />
+
+\includegraphics[width=0.2\linewidth]{images/book1} 
+
+\includegraphics[width=0.5\linewidth]{images/book} 
 
 Companion site: [study.sagepub.com/leite](https://study.sagepub.com/leite)
 
