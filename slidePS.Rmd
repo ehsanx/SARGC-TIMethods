@@ -3,15 +3,15 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
-  beamer_presentation: 
-    keep_md: yes
-    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: tango
     css: slides.css
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   slidy_presentation: 
     widescreen: yes
     smaller: yes
@@ -52,21 +52,32 @@ require(cobalt)
     - Md. Erfanul Hoque
     - Janie Coulombe
 
-## Format of the webinar
+## Assumptions of the webinar
 
 - *Target audience*: 
-  - Students / recent graduates familiar with regression
-  - Students / recent graduates familiar with R
+  - Familiar with regression
+  - Familiar with R
     - will explain some necessary package / functions / arguments
-  - have no/minimal idea about proponsity score
+  - have no/minimal idea about propensity score
+
+- *Topics covered*
+  - Not covering any new research
+  - Not covering statistical theory 
+    - implementation being the goal here
+  - Not attempting to reach any clinical conclusion
+
+## Format of the webinar
 
 - *Presentation format*
   - Rather informal
   - 1 hr vs. 2 hr
-  - Q/A at 45 min and at the end
+  - Q/A at 
+    - 45 min and 
+    - at the end
 
 - *Webinar Materials*
   - All reproducible codes provided
+    - [ehsanx.github.io/SARGC-TIMethods/](https://ehsanx.github.io/SARGC-TIMethods/)
   - Necessary references cited in respective slides
 
 ## Outline
@@ -485,7 +496,7 @@ include_graphics("images/psdesign.png")
 
 Many ways to use propensity scores (PS) in the analysis
 
-- **PS matching** [our focus today]
+- **PS matching** [our focus today: intuitive!]
 - PS weighting
 - PS stratification
 - PS used as a covariate
@@ -714,7 +725,7 @@ analytic.data[analytic.data$ID %in%
 
 - Criteria to assess success of step 2: PS estimation
   - better balance
-  - better overlap
+  - better overlap [no extrapolation!]
   - PS = 0 or PS = 1 needs close inspection
 
 ```{r ps3, out.width = "30%", cache=TRUE, echo = TRUE}
@@ -750,7 +761,7 @@ plot(match.obj, type = "hist")
 
 ### Step 3
 
-Assessment of Balance
+Assessment of Balance: Better than regression diagnostics!
 
 ```{r ps10, cache=TRUE, echo = TRUE}
 matched.data <- match.data(match.obj)
@@ -966,7 +977,7 @@ include_graphics("images/r9.png")
 - Model selection
   - interaction or polynomials
   - logistic vs. machine learning
-- Overlap vs. balance
+- Overlap vs. balance 
   - numeric and visual
 
 
@@ -978,14 +989,14 @@ include_graphics("images/books.png")
 
 ### Reporting Guideline
 
-- Reduction % of the matched data
+- Reduction % of the matched data: main objection against this method!
 - Residual imbalance
   - refit PS model
 - Subgroup analysis
   - Refit within each group for matching
 - Sensitivity analysis
   - unmeasured confounder / hdPS
-  - any positivity issue? 
+  - any positivity issue? Deleting extremes has consequences!
     - ad-hoc methods: truncation / trimming: bias-variance trade-off
 
 ```{r  out.width = "50%", fig.show = "hold", cache=TRUE}

@@ -2,7 +2,9 @@
 title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim"
 date: "30/09/2020"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -53,7 +55,7 @@ It is assumed that you have the following software packages installed. Webinar d
 - [Research Article describing the data](https://jamanetwork.com/journals/jama/articlepdf/407990/jama_276_11_030.pdf): The effectiveness of Right Heart Catheterization (RHC) in the initial care of critically ill patients. [Openlink](https://www.researchgate.net/publication/236311165_The_Effectiveness_of_Right_Heart_Catheterization_in_the_Initial_Care_of_Critically_III_Patients) for the article.
 - [Details of the variables](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.html) about the training dataset:
 - Link to download the [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv).
-- Following are reproducible codes to prepare the analytic data used in the talk.
+- Following are reproducible codes to prepare the analytic data used in the talk (toggle show/hide code).
 
 ```{r, eval = FALSE}
 rhc <- read.csv("http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.csv")

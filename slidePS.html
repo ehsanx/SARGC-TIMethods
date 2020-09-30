@@ -3143,31 +3143,56 @@ slide:not(.current) .plotly.html-widget{
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Format of the webinar</h2></hgroup><article  class="smaller " id="format-of-the-webinar">
+</article></slide><slide class=""><hgroup><h2>Assumptions of the webinar</h2></hgroup><article  class="smaller " id="assumptions-of-the-webinar">
 
 <ul>
 <li><em>Target audience</em>:
 
 <ul>
-<li>Students / recent graduates familiar with regression</li>
-<li>Students / recent graduates familiar with R
+<li>Familiar with regression</li>
+<li>Familiar with R
 
 <ul>
 <li>will explain some necessary package / functions / arguments</li>
 </ul></li>
-<li>have no/minimal idea about proponsity score</li>
+<li>have no/minimal idea about propensity score</li>
 </ul></li>
+<li><em>Topics covered</em>
+
+<ul>
+<li>Not covering any new research</li>
+<li>Not covering statistical theory
+
+<ul>
+<li>implementation being the goal here</li>
+</ul></li>
+<li>Not attempting to reach any clinical conclusion</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Format of the webinar</h2></hgroup><article  class="smaller " id="format-of-the-webinar">
+
+<ul>
 <li><em>Presentation format</em>
 
 <ul>
 <li>Rather informal</li>
 <li>1 hr vs. 2 hr</li>
-<li>Q/A at 45 min and at the end</li>
+<li>Q/A at
+
+<ul>
+<li>45 min and</li>
+<li>at the end</li>
+</ul></li>
 </ul></li>
 <li><em>Webinar Materials</em>
 
 <ul>
-<li>All reproducible codes provided</li>
+<li>All reproducible codes provided
+
+<ul>
+<li><a href='https://ehsanx.github.io/SARGC-TIMethods/' title=''>ehsanx.github.io/SARGC-TIMethods/</a></li>
+</ul></li>
 <li>Necessary references cited in respective slides</li>
 </ul></li>
 </ul>
@@ -3771,7 +3796,7 @@ publish(fit3m)</pre>
 <p>Many ways to use propensity scores (PS) in the analysis</p>
 
 <ul>
-<li><strong>PS matching</strong> [our focus today]</li>
+<li><strong>PS matching</strong> [our focus today: intuitive!]</li>
 <li>PS weighting</li>
 <li>PS stratification</li>
 <li>PS used as a covariate</li>
@@ -4083,7 +4108,7 @@ head(matches.only)</pre>
 
 <ul>
 <li>better balance</li>
-<li>better overlap</li>
+<li>better overlap [no extrapolation!]</li>
 <li>PS = 0 or PS = 1 needs close inspection</li>
 </ul></li>
 </ul>
@@ -4124,7 +4149,7 @@ stripchart(PS ~ RHC==&#39;RHC&#39;, vertical = TRUE,
 
 <h3>Step 3</h3>
 
-<p>Assessment of Balance</p>
+<p>Assessment of Balance: Better than regression diagnostics!</p>
 
 <pre class = 'prettyprint lang-r'>matched.data &lt;- match.data(match.obj)
 tab1m &lt;- CreateTableOne(vars = baselinevars,
@@ -4503,7 +4528,7 @@ publish(fit3b)</pre>
 <h3>Reporting Guideline</h3>
 
 <ul>
-<li>Reduction % of the matched data</li>
+<li>Reduction % of the matched data: main objection against this method!</li>
 <li>Residual imbalance
 
 <ul>
@@ -4518,7 +4543,7 @@ publish(fit3b)</pre>
 
 <ul>
 <li>unmeasured confounder / hdPS</li>
-<li>any positivity issue?
+<li>any positivity issue? Deleting extremes has consequences!
 
 <ul>
 <li>ad-hoc methods: truncation / trimming: bias-variance trade-off</li>
