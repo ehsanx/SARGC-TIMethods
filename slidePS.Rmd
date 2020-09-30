@@ -3,15 +3,15 @@ title: "A Practical Introduction to Propensity Score Analysis using R"
 author: "Ehsan Karim [http://ehsank.com/]"
 date: "30 Sept 2020: SPPH, UBC"
 output:
+  beamer_presentation: 
+    keep_md: yes
+    highlight: tango
   ioslides_presentation:
     widescreen: yes
     smaller: yes
     keep_md: yes
     highlight: tango
     css: slides.css
-  beamer_presentation: 
-    keep_md: yes
-    highlight: tango
   slidy_presentation: 
     widescreen: yes
     smaller: yes
@@ -52,6 +52,23 @@ require(cobalt)
     - Md. Erfanul Hoque
     - Janie Coulombe
 
+## Format of the webinar
+
+- *Target audience*: 
+  - Students / recent graduates familiar with regression
+  - Students / recent graduates familiar with R
+    - will explain some necessary package / functions / arguments
+  - have no/minimal idea about proponsity score
+
+- *Presentation format*
+  - Rather informal
+  - 1 hr vs. 2 hr
+  - Q/A at 45 min and at the end
+
+- *Webinar Materials*
+  - All reproducible codes provided
+  - Necessary references cited in respective slides
+
 ## Outline
 
 - [1] Data and Regression 
@@ -65,7 +82,7 @@ require(cobalt)
 
 ## [1] Right Heart Catheterization (RHC) Dataset 
 
-The dataset that we will use today is from Connors et al. (1996).
+The [dataset](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/rhc.html) that we will use today is from Connors et al. (1996).
 
 ```{r  out.width = "40%", fig.show = "hold", cache=TRUE}
 include_graphics("images/citeRHC.png") 
@@ -79,7 +96,7 @@ include_graphics("images/rhcvars.png")
   - Death at any time up to 180 Days
 - Treatment `swang1`  ($A$: Swan-Ganz catheter)
   - Whether or not a patient received a RHC
-- Covariate list: $L$ (`age`, `sex`, `race` , $\ldots$)
+- [Covariate list](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/Crhc.html): $L$ (`age`, `sex`, `race` , $\ldots$)
 - Analysis strategy: matching RHC patients with non-RHC patients
 
 
@@ -87,9 +104,10 @@ include_graphics("images/rhcvars.png")
 
 - `RHC` is helpful in guiding therapy decision
   - Helps determine the pressures within the heart
-- Popularly beleived that `RHC` is benefitial
-- Conducting RCT is hard (ethical reasons)
-- Benefit of `RHC` was not shown earlier (1996)
+  - Popularly beleived that `RHC` is benefitial
+  - Conducting RCT is hard (ethical reasons)
+  - Benefit of `RHC` was not shown earlier (1996)
+
 - SUPPORT data has 2 phases
   - phase 1: prospective observational study
   - phase 2: cluster RCT
@@ -966,12 +984,14 @@ include_graphics("images/books.png")
 - Subgroup analysis
   - Refit within each group for matching
 - Sensitivity analysis
-  - unmeasured confounder
+  - unmeasured confounder / hdPS
   - any positivity issue? 
     - ad-hoc methods: truncation / trimming: bias-variance trade-off
 
-```{r  out.width = "50%", cache=TRUE}
+```{r  out.width = "50%", fig.show = "hold", cache=TRUE}
 include_graphics("images/sub.png") 
+
+include_graphics("images/hdps.png")
 ```
 
 ## Further Reading
@@ -988,5 +1008,5 @@ Companion site: [study.sagepub.com/leite](https://study.sagepub.com/leite)
 ## Thank you!
 
 <center>
-<font size="50">[ehsank.com](http://ehsank.com/)</font>
+<font size="50">[ehsank.com/workshops/](https://ehsank.com/workshops/)</font>
 </center>
